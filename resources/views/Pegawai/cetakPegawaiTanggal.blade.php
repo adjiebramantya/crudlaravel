@@ -45,36 +45,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content">
       <div class="card card-info card-outline">
           <div class="card-header">
-            <div class="card-tools">
-              <a href="{{url('pegawai/create')}}" class="btn btn-success">Tambah Data <i class="fas fa-plus-square"></i></a>
-              <a href="{{url('cetakPegawai')}}" target="_blank" class="btn btn-primary">Cetak Data Pegawai <i class="fas fa-book"></i></a>
-            </div>
+                <h3>Print Data Pegawai</h3>
           </div>
           <div class="card-body">
-            <table class="table table-bordered">
-              <tr>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Jabatan</th>
-                <th>Tanggal Lahir</th>
-                <th>Aksi</th>
-              </tr>
-              @foreach($data as $item)
-              <tr>
-                <td>{{ $item->nama }}</td>
-                <td>{{ $item->alamat }}</td>
-                <td>{{ $item->jabatan->jabatan }}</td>
-                <td>{{ date('d-m-Y', strtotime( $item->tanggal_lahir)) }}</td>
-                <td>
-                  <a href="{{url('pegawai/'.$item->id.'/edit')}}"><i class="far fa-edit"></i></a> |
-                  <a href="{{url('pegawai/'.$item->id)}}" onclick="return confirm('Yakin Ingin Menghapus {{ $item->nama }}?');" ><i class="far fa-trash-alt" style="color:red;"></i></a>
-                </td>
-              </tr>
-              @endforeach
-            </table>
+            <div class="form-group mb-3">
+                  <label for="label">Tanggal Awal : </label>
+                  <input type="date" name="tglAwal" id="tglAwal" class="form-control">
+            </div>
+            <div class="form-group mb-3">
+                <label for="label">Tanggal Akhir : </label>
+                <input type="date" name="tglAkhir" id="tglAkhir" class="form-control">
+            </div>
+            <div class="form-group mb-3">
+                <a href="" onclick="this.href='/cetakPegawaiTanggal/'+document.getElementById('tglAwal').value+'/'+document.getElementById('tglAkhir').value" 
+                  target="_blank" class="btn btn-primary col-md-12" rel="noopener noreferrer">Cetak</a>
+            </div>
           </div>
           <div class="card-footer">
-            {{ $data->links( )}}
           </div>
       </div>
     </div>

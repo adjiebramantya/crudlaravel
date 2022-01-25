@@ -24,6 +24,14 @@ class PegawaiController extends Controller
         return view('Pegawai.dataPegawai', compact('data'));
     }
 
+    public function cetakPegawai()
+    {
+        $data = Pegawai::with('jabatan')->latest()->get();
+
+
+        return view('Pegawai.cetakPegawai', compact('data'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -127,5 +135,18 @@ class PegawaiController extends Controller
 
       return back();
 
+    }
+
+    public function cetakTanggal()
+    {
+      return view('Pegawai.cetakPegawaiTanggal');
+    }
+
+    public function cetakPegawaiTanggal($tglAwal, $tglAkhir)
+    {
+      //dd(["tanggalAwal:".$tglAwal , "TanggalAkhir:".$tglAkhir]);
+      $data = Pegawai::with('jabatan')->whereBetween('tanggal_lahir',[$tglAwal, $tglAkhir])->latest()->get();
+
+      return view('Pegawai.hasilCetakPegawaiTanggal',compact('data'));
     }
 }

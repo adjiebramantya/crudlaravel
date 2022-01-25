@@ -36,9 +36,25 @@
              with font-awesome or any other icon font library -->
         <li class="nav-item">
           <a href="{{url('pegawai')}}" class="nav-link">
-            <i class="nav-icon fa-user-alt"></i>
+            <i class="fas fa-user-circle"></i>
             <p>
               Pegawai
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{url('cetakTanggal')}}" class="nav-link">
+            <i class="fas fa-print"></i>
+            <p>
+              Cetak Pegawai
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{url('gambar')}}" class="nav-link">
+            <i class="fas fa-images"></i>
+            <p>
+              Gambar
             </p>
           </a>
         </li>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\GambarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,9 @@ Route::get('/', function () {
 
 Route::resource('pegawai', PegawaiController::class);
 Route::get('pegawai/{pegawai}', [PegawaiController::class,'delete']);
+Route::get('cetakPegawai', [PegawaiController::class,'cetakPegawai'])->name('cetakPegawai');
+Route::get('cetakTanggal', [PegawaiController::class,'cetakTanggal'])->name('cetakTanggal');
+Route::get('cetakPegawaiTanggal/{tglAwal}/{tglAkhir}', [PegawaiController::class,'cetakPegawaiTanggal'])->name('cetakPegawaiTanggal');
+
+Route::resource('gambar',GambarController::class);
+Route::get('gambar/{gambar}', [GambarController::class,'delete']);

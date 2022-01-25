@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Data Pegawai</title>
+  <title>Ubah - Data Gambar</title>
 
   @include('template.head')
 </head>
@@ -33,7 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Data Pegawai</li>
+              <li class="breadcrumb-item active">Data Gambar</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -44,37 +44,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <div class="content">
       <div class="card card-info card-outline">
-          <div class="card-header">
-            <div class="card-tools">
-              <a href="{{url('pegawai/create')}}" class="btn btn-success">Tambah Data <i class="fas fa-plus-square"></i></a>
-              <a href="{{url('cetakPegawai')}}" target="_blank" class="btn btn-primary">Cetak Data Pegawai <i class="fas fa-book"></i></a>
-            </div>
-          </div>
+        <div class="card-header">
+          <h3>Ubah Data Gambar</h3>
+        </div>
           <div class="card-body">
-            <table class="table table-bordered">
-              <tr>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Jabatan</th>
-                <th>Tanggal Lahir</th>
-                <th>Aksi</th>
-              </tr>
-              @foreach($data as $item)
-              <tr>
-                <td>{{ $item->nama }}</td>
-                <td>{{ $item->alamat }}</td>
-                <td>{{ $item->jabatan->jabatan }}</td>
-                <td>{{ date('d-m-Y', strtotime( $item->tanggal_lahir)) }}</td>
-                <td>
-                  <a href="{{url('pegawai/'.$item->id.'/edit')}}"><i class="far fa-edit"></i></a> |
-                  <a href="{{url('pegawai/'.$item->id)}}" onclick="return confirm('Yakin Ingin Menghapus {{ $item->nama }}?');" ><i class="far fa-trash-alt" style="color:red;"></i></a>
-                </td>
-              </tr>
-              @endforeach
-            </table>
-          </div>
-          <div class="card-footer">
-            {{ $data->links( )}}
+            <form class="" action="{{ url('gambar/'.$data->id) }}" method="post" enctype="multipart/form-data" >
+              @csrf
+              <input type="hidden" name="_method" value="PATCH" >
+              <div class="form-group">
+                <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Gambar" value="{{ $data->nama }}">
+                @foreach($errors->get('nama') as $msg)
+                  <p class="text-danger">{{ $msg }}</p>
+                @endforeach
+              </div>
+              <div class="form-group">
+                <input class="form-control" name="gambar" type="file" id="gambar">
+                @foreach($errors->get('gambar') as $msg)
+                  <p class="text-danger">{{ $msg }}</p>
+                @endforeach
+              </div>
+              <div class="form-group">
+                <img src="{{ asset('img/'.$data->gambar) }}" width="30%" height="20%" alt="">
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success">Ubah Data</button>
+              </div>
+            </form>
           </div>
       </div>
     </div>
@@ -83,6 +78,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+    <div class="p-3">
+      <h5>Title</h5>
+      <p>Sidebar content</p>
+    </div>
+  </aside>
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
@@ -93,6 +95,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- REQUIRED SCRIPTS -->
   @include('template.scriptjs')
-  @include('sweetalert::alert')
 </body>
 </html>
